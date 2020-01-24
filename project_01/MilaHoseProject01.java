@@ -40,7 +40,7 @@
 
 public class MilaHoseProject01 {
   public static void main(String[] args) {
-    System.out.print("Hello, World!");
+    System.out.println("Hello, World!");
     System.out.println("This is my first Java Program");
   }
 }
