@@ -5,7 +5,7 @@ import java.util.Scanner;
 									EASY WAY
 ==================================================
 
-class BinaryToDecimal {
+class MilaHoseProject04 {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 
@@ -25,7 +25,7 @@ class BinaryToDecimal {
 ==================================================
 */
 
-class BinaryToDecimal {
+class MilaHoseProject04 {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		int exponent = 0, decimal = 0;
@@ -57,4 +57,4 @@ class BinaryToDecimal {
 		// Output the binary digit converted to decimal notation
 		System.out.println("The decimal value for the binary digit " + binaryString + " is: " + decimal);
 	}
-}
+} 
