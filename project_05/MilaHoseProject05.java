@@ -6,7 +6,7 @@ class MilaHoseProject05 {
     char keepCalculating = 'Y';
 
     System.out.println("\n===================================");
-    System.out.println("Welcome to the Mortgage	Calculator!");
+    System.out.println("Welcome to the Mortgage Calculator!");
     System.out.println("===================================\n");
 
     do {
