@@ -10,6 +10,7 @@ public class MilaHoseProject08 {
       int number = input.nextInt();
       int[] nums = decimalToBinary(number);
 
+      // Print heads or tails value
       System.out.println();
       for (int i = 0; i < nums.length; i++) {
         if (nums[i] == 0) {
@@ -18,7 +19,7 @@ public class MilaHoseProject08 {
           System.out.print("T ");
         }
 
-        if ((i+1) % 3 == 0) {
+        if ((i + 1) % 3 == 0) {
           System.out.println();
         }
       }
@@ -34,7 +35,8 @@ public class MilaHoseProject08 {
   public static int[] decimalToBinary(int n) {
     int[] nums = new int[9];
   
-    for (int i = nums.length - 1; i >= 0 && n > 0; i--) {
+    // Add the numbers (1's and 0's) to an aray
+    for (int i = nums.length - 1; i >= 0; i--) {
       if (n % 2 == 0) {
         nums[i] = 0;
       } else {
