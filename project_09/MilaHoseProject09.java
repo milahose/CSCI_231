@@ -6,16 +6,29 @@ class MilaHoseProject09 {
     char choice = 'Y';
 
     do {
-      System.out.print("Enter a number of Temperature objects to instantiate: ");
+      Temperature[] temps = new Temperature[4];
+      
+      temps[0] = new Temperature();
+      displayTemp(temps[0], 1, 0.0, 'C');
 
-      Temperature temp1 = new Temperature();
-      displayTemp(temp1, 1, 0.0, 'C');
-      Temperature temp2 = new Temperature(77.0, 'C');
-      displayTemp(temp2, 2, 77.0, 'C');
-      Temperature temp3 = new Temperature(77.0, 'F');
-      displayTemp(temp3, 3, 77.0, 'F');
-      Temperature temp4 = new Temperature(25.0, 'C');
-      displayTemp(temp4, 4, 25.0, 'C');
+      System.out.print("\n\nPlease choose a degree for Temperature two: ");
+      double deg2 = input.nextDouble();
+      temps[1] = new Temperature(deg2);
+      displayTemp(temps[1], 2, deg2, 'C');
+
+      System.out.print("\n\nPlease choose a scale for Temperature three: ");
+      char scale3 = Character.toUpperCase(input.next().charAt(0));
+      temps[2] = new Temperature(scale3);
+      displayTemp(temps[2], 3, 0.0, scale3);
+
+      System.out.print("\n\nPlease choose a degree for Temperature four: ");
+      double deg4 = input.nextDouble();
+      System.out.print("\nPlease choose a scale for Temperature four: ");
+      char scale4 = Character.toUpperCase(input.next().charAt(0));
+      temps[3] = new Temperature(deg4, scale3);
+      displayTemp(temps[3], 4, deg4, scale3);
+
+      displayTempsCreated(temps);
       
 
       // ========================================================
@@ -26,11 +39,6 @@ class MilaHoseProject09 {
     } while (choice == 'Y');
   }
 
-  public static void printConvertedTemp (Temperature temp, int n) {
-    System.out.println("\nTemperature " + n + " is " + temp.getDegreeInCelsius() + " C.\n");
-    System.out.println("Temperature " + n + " is " + temp.getDegreeInFahrenheit() + " F.\n");
-  }
-
   public static void displayTemp(Temperature temp, int n, double degree, char scale) {
     Scanner input = new Scanner (System.in);
     String num = "";
@@ -38,27 +46,29 @@ class MilaHoseProject09 {
     switch(n) {
       case 1: 
         num = "first";
-        System.out.println("\n\nThe first Temperature has been created using the default constructor "
-        + "which sets the degree to a default value of 0.0 and the scale to a default value of 'C'.");
+        System.out.println("\n\nThe first Temperature has been created using the default constructor which ");
+        System.out.println("sets the degree to a default value of 0.0 and the scale to a default value of 'C'.");
         break;
       case 2: 
         num = "second";
-        System.out.println("\n\nThe second Temperature has been created using "
-        + "the constructor with the double argument: " + degree + ".");
+        System.out.print("\n\nThe second Temperature has been created using ");
+        System.out.print("the constructor with the double argument: " + degree + ".");
         break;
       case 3: 
       num = "third";
-        System.out.println("\n\nThe third Temperature has been created using the constructer "
-        + "which sets the degree to a default value of 0.0 and the scale to " + scale + ".");
+        System.out.print("\n\nThe third Temperature has been created using the constructer ");
+        System.out.print("which sets the degree to a default value of 0.0 and the scale to " + scale + ".");
         break;
       case 4: 
         num = "fourth";
-        System.out.println("\n\nThe fourth Temperature has been created using the constructer "
-        + "which sets the degree to " + degree + " and the scale to " + scale + ".");
+        System.out.println("\n\nThe fourth Temperature has been created using the constructer ");
+        System.out.print("which sets the degree to " + degree + " and the scale to " + scale + ".");
         break;
     }
 
-    printConvertedTemp(temp, n);
+    System.out.println("\n\nTemperature " + n + " is " + String.format("%.2f", temp.getDegreeInCelsius()) + " C.\n");
+    System.out.println("Temperature " + n + " is " + String.format("%.2f", temp.getDegreeInFahrenheit()) + " F.\n");
+
     System.out.println("Set the degree (a number) and the scale (F or C) of the " + num + " Temperature.\n");
     
     System.out.print("First set the degree: ");
@@ -66,10 +76,41 @@ class MilaHoseProject09 {
     temp.setDegree(newDegree);
 
     System.out.print("\nNow set the scale: ");
-    double newScale = Character.toUpperCase(input.next().charAt(0));
+    char newScale = Character.toUpperCase(input.next().charAt(0));
     temp.setDegree(newScale);
 
-    printConvertedTemp(temp, n);
+    System.out.println("\nNow Temperature " + n + " is " + String.format("%.2f", temp.getDegreeInCelsius())
+    + " C, which is " + String.format("%.2f", temp.getDegreeInFahrenheit()) + " F.\n");
+  }
+
+  public static void displayTempsCreated(Temperature[] temps) {
+    int count = 0;
+    System.out.print("\nIn order of creation the Temperatures in Celcius are: ");
+    while (count < 4) {
+      System.out.print(String.format("%.2f", temps[count].getDegreeInCelsius()) + (count == 3 ? ". " : ", "));
+      count++;
+    }
+
+    count = 0;
+    System.out.print("\nIn order of creation the Temperatures in Fahrenheit are: ");
+    while (count < 4) {
+      System.out.print(String.format("%.2f", temps[count].getDegreeInFahrenheit()) + (count == 3 ? ". " : ", "));
+      count++;
+    }
+  }
+
+  public static void displayTempEquality(Temperature temp, String order) {
+//     In order of creation the Temperatures in Celcius are: 77.00, 25.00, 25.00, 100.00
+// In order of creation the Temperatures in Fahrenheit are: 170.60, 77.00, 77.00, 212.00
+
+//     boolean equal = temp.equals();
+//     System.out.println("\nThe " + order + " Temperature is ");
+
+// The first Temperature is not equal to the second.
+// The first Temperature is not less than the second.
+// The first Temperature is greater than the second.
+
+
   }
 }
 
