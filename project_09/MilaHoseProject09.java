@@ -23,12 +23,13 @@ class MilaHoseProject09 {
 
       System.out.print("\n\nPlease choose a degree for Temperature four: ");
       double deg4 = input.nextDouble();
-      System.out.print("\nPlease choose a scale for Temperature four: ");
+      System.out.print("Please choose a scale for Temperature four: ");
       char scale4 = Character.toUpperCase(input.next().charAt(0));
       temps[3] = new Temperature(deg4, scale3);
       displayTemp(temps[3], 4, deg4, scale3);
 
       displayTempsCreated(temps);
+      displayTempEquality(temps);
       
 
       // ========================================================
@@ -56,13 +57,13 @@ class MilaHoseProject09 {
         break;
       case 3: 
       num = "third";
-        System.out.print("\n\nThe third Temperature has been created using the constructer ");
-        System.out.print("which sets the degree to a default value of 0.0 and the scale to " + scale + ".");
+        System.out.println("\n\nThe third Temperature has been created using the constructer ");
+        System.out.println("which sets the degree to a default value of 0.0 and the scale to '" + scale + "'.");
         break;
       case 4: 
         num = "fourth";
         System.out.println("\n\nThe fourth Temperature has been created using the constructer ");
-        System.out.print("which sets the degree to " + degree + " and the scale to " + scale + ".");
+        System.out.print("which sets the degree to " + degree + " and the scale to '" + scale + "'.");
         break;
     }
 
@@ -97,20 +98,37 @@ class MilaHoseProject09 {
       System.out.print(String.format("%.2f", temps[count].getDegreeInFahrenheit()) + (count == 3 ? ". " : ", "));
       count++;
     }
+
+    System.out.println("\n\n");
   }
 
-  public static void displayTempEquality(Temperature temp, String order) {
-//     In order of creation the Temperatures in Celcius are: 77.00, 25.00, 25.00, 100.00
-// In order of creation the Temperatures in Fahrenheit are: 170.60, 77.00, 77.00, 212.00
+  public static void displayTempEquality(Temperature[] temps) {
+    for (int i = 0; i < 3; i++) {
+      for (int j = i; j < 3; j++) {
+        System.out.println("The " + placeKey(i + 1) + " Temperature is" + 
+        (temps[i].equals(temps[j + 1]) ? " " : " not ") + "equal to the " + placeKey(j + 2) + ".");
 
-//     boolean equal = temp.equals();
-//     System.out.println("\nThe " + order + " Temperature is ");
+        System.out.println("The " + placeKey(i + 1) + " Temperature is" + 
+        (temps[i].isLessThan(temps[j + 1]) ? " " : " not ") + "less than the " + placeKey(j + 2) + ".");
 
-// The first Temperature is not equal to the second.
-// The first Temperature is not less than the second.
-// The first Temperature is greater than the second.
+        System.out.println("The " + placeKey(i + 1) + " Temperature is" + 
+        (temps[i].isGreaterThan(temps[j + 1]) ? " " : " not ") + "greater than the " + placeKey(j + 2) + ".");
 
+        System.out.println("\n");
+      }
+    }
+  }
 
+  public static String placeKey(int n) {
+    if (n == 1) {
+      return "first";
+    } else if (n == 2) {
+      return "second";
+    } else if (n == 3) {
+      return "third";
+    } else {
+      return "fourth";
+    }
   }
 }
 

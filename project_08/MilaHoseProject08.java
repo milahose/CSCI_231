@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class MilaHoseProject08 {
   public static void main (String[] args) {
     Scanner input = new Scanner (System.in);
-    int choice = 'Y';
+    char choice = 'Y';
 
     do {
       System.out.print("\nEnter a number between 0 and 511: ");
