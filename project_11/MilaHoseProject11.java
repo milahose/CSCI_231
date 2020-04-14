@@ -1,64 +1,86 @@
+import java.util.Scanner;
+
 class MilaHoseProject11 {
 	public static void main(String[] args) {
-    Account[] accounts = new Account[4];
-    accounts[0] = new CheckingAccount();
-    accounts[1] = new CheckingAccount(1, 2000);
-    accounts[2] = new SavingAccount();
-    accounts[3] = new SavingAccount(1, 2000, 0.06);
+    Scanner input = new Scanner(System.in);
+    char choice = 'Y';
 
-    System.out.println();
+    do {
+      Account[] accounts = new Account[4];
+      accounts[0] = new CheckingAccount();
+      accounts[1] = new CheckingAccount();
+      accounts[2] = new SavingAccount();
+      accounts[3] = new SavingAccount();
 
-    accounts[0].setId(1);
-    System.out.println("Setting the first checking account ID to 1...");
-    accounts[0].setBalance(3000);
-    System.out.println("Setting the first checking account balance to 3000...");
-    accounts[0].deposit(50);
-    System.out.println("A deposit of 50 was made to Account 1. The balance is now " + accounts[0].getBalance() + ".");
-    accounts[0].withdraw(100);
-    System.out.println("A withdrawel of 100 was made to Account 1. The balance is now " + accounts[0].getBalance() + ".\n");
-    System.out.println(accounts[0].toString());
+      System.out.println();
 
-    accounts[1].setId(2);
-    System.out.println("Setting the second checking account ID to 2...");
-    accounts[1].setBalance(25000);
-    System.out.println("Setting the second checking account balance to 25000...");
-    accounts[1].deposit(2300);
-    System.out.println("A deposit of 2300 was made to Account 2. The balance is now " + accounts[0].getBalance() + ".");
-    accounts[0].withdraw(1000);
-    System.out.println("A withdrawel of 1000 was made to Account 2. The balance is now " + accounts[0].getBalance() + ".\n");
-    System.out.println(accounts[0].toString());
+      for (int i = 0; i < 4; i++) {
+        String accountType = (i == 0 || i == 1) ? "checking" : "saving";
 
-    accounts[2].setId(3);
-    System.out.println("Setting the second checking account ID to 2...");
-    accounts[2].setBalance(50000);
-    System.out.println("Setting the second checking account balance to 25000...");
-    ((SavingAccount)accounts[2]).setInterestRate(0.06);
-    System.out.println("Setting the second checking account interest rate to 6%...");
-    accounts[2].deposit(150);
-    System.out.println("A deposit of 2300 was made to Account 2. The balance is now " + accounts[0].getBalance() + ".");
-    accounts[2].withdraw(2000);
-    System.out.println("A withdrawel of 1000 was made to Account 2. The balance is now " + accounts[0].getBalance() + ".");
-    ((SavingAccount)accounts[2]).addInterest();
-    System.out.println("An interest payment of " + 
-    ((SavingAccount)accounts[2]).getInterestRate() + 
-    " was made to Account 2. The balance is now " + accounts[2].getBalance() + ".\n");
-    System.out.println(accounts[0].toString());
+        accounts[i].setId(i + 1);
+        System.out.println("\nThe " + placeKey(i + 1) + " account has been set to ID #" + (i + 1) + ".");
 
-    accounts[3].setId(4);
-    System.out.println("Setting the second checking account ID to 2...");
-    accounts[3].setBalance(100000);
-    System.out.println("Setting the second checking account balance to 25000...");
-    ((SavingAccount)accounts[2]).setInterestRate(0.09);
-    System.out.println("Setting the second checking account interest rate to 6%...");
-    accounts[3].deposit(2000);
-    System.out.println("A deposit of 2300 was made to Account 2. The balance is now " + accounts[0].getBalance() + ".");
-    accounts[3].withdraw(7000);
-    System.out.println("A withdrawel of 1000 was made to Account 2. The balance is now " + accounts[0].getBalance() + ".");
-    ((SavingAccount)accounts[3]).addInterest();
-    System.out.println("An interest payment of " + 
-    ((SavingAccount)accounts[3]).getInterestRate() + 
-    " was made to Account 2. The balance is now " + accounts[2].getBalance() + ".\n");
-    System.out.println(accounts[3].toString());
+        System.out.print("\nPlease enter a balance for the " + accountType + " account with ID " + (i + 1) + ": ");
+        double balance = input.nextDouble();
+        accounts[i].setBalance(balance);
+
+        System.out.println("\nThe " + accountType + " account with ID " + (i + 1) 
+        + " now has a balance of $" + String.format("%.2f", accounts[i].getBalance()) + ".");
+
+        if (accountType == "saving") {
+          System.out.print("\nPlease set the interest rate as a decimal for the " 
+          + accountType + " account with ID " + (i + 1) + ": ");
+          double interestRate = input.nextDouble();
+          ((SavingAccount)accounts[i]).setInterestRate(interestRate);
+        }
+
+        System.out.print("\nPlease make a deposit for the " + accountType + " account with ID " + (i + 1) + ": ");
+        double deposit = input.nextDouble();
+        accounts[i].deposit(deposit);
+
+        System.out.println("\nThe " + accountType + " account with ID " + (i + 1) 
+        + " now has a balance of $" + String.format("%.2f", accounts[i].getBalance()) + ".");
+
+        System.out.print("\nPlease make a withdrawel for the " + accountType + " account with ID " + (i + 1) + ": ");
+        double withdrawel = input.nextDouble();
+        accounts[i].withdraw(withdrawel);
+
+        System.out.println("\nThe " + accountType + " account with ID " + (i + 1) 
+        + " now has a balance of $" + String.format("%.2f", accounts[i].getBalance()) + ".\n");
+
+        if (accountType == "saving") {
+          ((SavingAccount)accounts[i]).addInterest();
+
+          System.out.println("An interest payment of " + ((SavingAccount)accounts[i]).getInterestRate()
+          + "% was made to the " + accountType + " account with ID " + (i + 1) + ".");
+
+          System.out.println("\nThe " + accountType + " account with ID " + (i + 1) 
+          + " now has a balance of $" + String.format("%.2f", accounts[i].getBalance()) + ".\n");
+        }
+
+        System.out.println(accounts[i].toString());
+      }
+
+      // Ask user if they want to repeat the test
+      // ========================================================
+      System.out.print("\n\nWould you like to try again? Y/N: ");
+      choice = Character.toUpperCase(input.next().charAt(0));
+      input.nextLine();
+  
+    } while (choice == 'Y');
+  }
+
+  // Get place key based on index
+  public static String placeKey(int n) {
+    if (n == 1) {
+      return "first";
+    } else if (n == 2) {
+      return "second";
+    } else if (n == 3) {
+      return "third";
+    } else {
+      return "fourth";
+    }
   }
 }
 
@@ -100,7 +122,7 @@ abstract class Account {
   public abstract void withdraw(double amount);
 
   public String toString() {
-    return "Account ID: " + id + "\nAccount Balance: " + balance + "\n";
+    return "Account ID: " + id + "\nAccount Balance: $" + String.format("%.2f", balance) + "\n";
   }
 }
 
