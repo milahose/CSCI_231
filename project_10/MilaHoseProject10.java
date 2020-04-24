@@ -63,7 +63,15 @@ class MilaHoseProject10 {
           break;
         case 4:
           // .toLowerCase() test
-          System.out.println("\nThe lowercase version of the string is: '" + testStr.toLowerCase() + ".");
+
+          // Create a new MyString test object
+          MyString lowerCaseStr = testStr.toLowerCase();
+
+          // Print the result
+          System.out.println("");
+          System.out.print("The lowercase version of the string is: '");
+          lowerCaseStr.getString();
+          System.out.println("'.");
           break;
         case 5:
           // .equals() test
